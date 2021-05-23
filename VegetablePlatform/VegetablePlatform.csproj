@@ -470,7 +470,6 @@
     <Content Include="Views\Company\CommonQuestion.cshtml" />
     <Content Include="Views\Main\SearchResult.cshtml" />
     <Content Include="Views\Product\ShoppingCar.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
