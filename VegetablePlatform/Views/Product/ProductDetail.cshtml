@@ -1,0 +1,97 @@
+﻿@model VegetablePlatform.Models.Product
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/plus_minus_counter.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-3.0.0.js"></script>
+<style>
+    body {
+        background-color: black
+    }
+</style>
+
+<body>
+    <div class="container-fluid body-content">
+        <p></p>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                <img src="~/Images/@Html.DisplayTextFor(model => model.Img)" class="img-fluid rounded mx-auto d-block" alt="...">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8" style="color:white" ;>
+                <p class="h1">@Html.DisplayTextFor(model => model.Name)</p><br>
+                <p class="h2" style="color:red">原價&emsp;$@Html.DisplayTextFor(model => model.Price)</p>
+                <p class="h2">
+                    數量&emsp;
+                    <span class="minus">-</span>
+                    <input type="text" value="1" />
+                    <span class="plus">+</span>
+                </p>
+                <br>
+                @{
+                    if (Model != null)
+                    {
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;" 
+                                onclick="location.href = '@Url.Action("AddCar", "Product",new { Pid = Model.Pid })';">
+                            <img src="~/Images/購物車.png" width="50" height="50">
+                            <span class="h3" style="vertical-align:middle;font-weight: bold;">加入購物車</span>
+                        </button>
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;">
+                            <img src="~/Images/wallet.png" width="50" height="50">
+                            <span class="h3" style="vertical-align:middle;font-weight: bold;">直接結帳&emsp;</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;" disabled>
+                            <img src="~/Images/購物車.png" width="50" height="50">
+                            <span class="h3" style="vertical-align:middle;font-weight: bold; text-decoration:line-through">加入購物車</span>
+                        </button>
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;" disabled>
+                            <img src="~/Images/wallet.png" width="50" height="50">
+                            <span class="h3" style="vertical-align:middle;font-weight: bold; text-decoration:line-through">直接結帳&emsp;</span>
+                        </button>
+                    }
+                }
+
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p class="h2" style="color:white;margin-top:20px" align="center" ;>產品介紹</p><br>
+                <h5 style="color:white">@Html.Raw(ViewBag.Message)</h5>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p class="h2" style="color:white;margin-top:20px" align="center" ;>商品退換貨須知</p><br>
+                <h5 class="Return" style="color:white"></h5>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p class="h2" style="color:white;margin-top:20px" align="center" ;>運送及其他說明</p><br>
+                <h5 class="Transport" style="color:white"></h5>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <p class="h2" style="color:white;margin-top:20px" align="center" ;>政令宣導</p><br>
+                <h5 class="Policy" style="color:white"></h5>
+            </div>
+        </div>
+    </div>
+</body> 
+<script>
+    $(document).ready(function () {
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+    });
+    $(".Return").load("/Txt/商品退換貨須知.txt");
+    $(".Transport").load("/Txt/運送說明.txt");
+    $(".Policy").load("/Txt/政令宣導.txt");
+</script>

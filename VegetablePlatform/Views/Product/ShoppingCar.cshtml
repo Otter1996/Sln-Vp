@@ -1,0 +1,99 @@
+﻿@model IEnumerable<VegetablePlatform.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "ShoppingCar";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<link href="~/Content/plus_minus_counter.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-3.0.0.js"></script>
+<style>
+    body {
+        background-color: black;
+    }
+    th,td{
+        color:white;
+    }
+</style>
+<body>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <p class="h2" style="color:white;margin-top:20px" align="center" ;>會員購物清單</p><br>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fOrderGuid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fPid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fIsApproved)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="color:white">
+                    @Html.DisplayFor(modelItem => item.fOrderGuid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fUserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fPid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fName)
+                </td>
+                <td>
+                    <span class="minus">-</span>
+                    <input type="text" value="@item.fQty" />
+                    <span class="plus">+</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fIsApproved)
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">刪除</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+<script>
+    $(document).ready(function () {
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+    });
+</script>

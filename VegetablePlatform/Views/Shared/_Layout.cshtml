@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid body-content">
+        <!--導覽列-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--品牌圖示-->
+            <a class="navbar-brand" href="@Url.Action("Main","Main")">
+                <img src="~/Images/Logo.png" width="30" height="30" alt="">
+                <span class="h3" style="vertical-align:middle;font-weight: bold;">濰濰植物網</span>
+            </a>
+            <!--縮小按鈕圖示-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto nav-fill">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Register","Main")">會員註冊</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("Login","Main")">會員登入</a>
+                    </li>
+                    <li class="nav-item dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            全部分類
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="@Url.Action("ProductIndex","Product",new { name = "SUC"})">多肉植物</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("ProductIndex","Product",new { name = "SMALL"})">小型植栽</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("ProductIndex","Product",new { name = "BIG"})">大型植栽</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("ProductIndex","Product",new { name = "FLO"})">鮮花花材</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("ProductIndex","Product",new { name = "TOOL"})">農藝用品</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">訂單查詢</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("CommonQuestion","Company")">常見問題</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="@Url.Action("ContactUs","Company")">聯絡我們</a>
+                    </li>
+                    <!--增加間距-->
+                    <li>
+                        &ensp;&ensp;&ensp;&ensp;&ensp;
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")" target="_blank">
+                    <input class="form-control mr-sm-2" type="search" placeholder="找什麼植物嗎?" aria-label="Search" id="productname" name="productname">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btn-search">搜尋</button>
+                </form>
+            </div>
+        </nav>
+        <br><br>
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="row" style="color:white">
+                <div class="col-sm-0 col-md-0 col-lg-1 col-xl-1"></div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                    付款方式<br>
+                    <a href="#">分期付款</a><br>
+                    <a href="#">郵局匯款</a><br>
+                    <a href="#">線上支付</a><br>
+                    <a href="#">公司轉帳</a>
+                </div>
+                <div class="col-sm-12 col-md-0 col-lg-1 col-xl-2">&ensp;</div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                    會員中心<br>
+                    <a href="#">會員修改密碼</a><br>
+                    <a href="#">會員修改個人資料</a><br>
+                    <a href="#">修改收貨地址</a><br>
+                    <a href="#">售後服務</a>
+                </div>
+                <div class="col-sm-12 col-md-0 col-lg-1 col-xl-2">&ensp;</div>
+                <div class="col-sm-12 col-md-6 col-lg-2 col-xl-2">
+                    聯絡資訊<br>
+                    <div>電話 : <a href="tel:+886-918******">07-0000000</a></div>
+                    <div>傳真 : <a>暫不提供</a></div>
+                    <div>地址 : <a href="https://www.google.com.tw/maps/place/Kaohsiung" target="_blank">高雄市OO區OO路OO號</a></div>
+                    <div>E-mail : <a href="mailto: fake_email_address@gmail.com">Email-Address</a></div>
+                </div>
+                <div class="col-sm-0 col-md-6 col-lg-1 col-xl-1"></div>
+            </div>
+            <p>&copy; @DateTime.Now.Year - JaWei ASP.NET Application</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+<script>
+    let name = document.getElementById('productname');
+    document.getElementById("btn-search").addEventListener('click', function (){
+        if (name.value.length > 10) {
+            alert('不可以輸入超過10個字，請重新搜尋。');
+            name.value = '';
+            event.preventDefault();
+        }
+        else if (name.value.length < 2)
+        {
+            alert('不可以輸入少於2個字，請重新搜尋。');
+            name.value = '';
+            event.preventDefault();
+        }
+    });
+</script>

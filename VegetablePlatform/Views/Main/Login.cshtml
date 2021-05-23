@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+        .form {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+
+        body {
+            background-color: black
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid body-content" style="margin-top: 250px">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                <form class="form" method="post" action="@Url.Action("Login","Main")" novalidate id="LoginForm">
+                    <div class="row">
+                        <div class="col-12" style="color:red" align="center">
+                            @ViewBag.Message
+                        </div>
+                        <!--帳號-->
+                        <div class="col-12">
+                            <label for="Account" class="form-label">帳號</label>
+                            <input type="text" class="form-control" id="Account" name="UserId" placeholder="請輸入帳號" required>
+                            <div class="invalid-feedback">
+                                帳號為必填。
+                            </div>
+                        </div>
+                        <!--密碼-->
+                        <div class="col-12">
+                            <label for="Password" class="form-label">密碼</label>
+                            <input type="text" class="form-control" id="Password" name="UserPassword" placeholder="請輸入密碼" required>
+                            <div class="invalid-feedback">
+                                密碼為必填。
+                            </div>
+                        </div>
+                        <!--記住我-->
+                        <div class="col-12">
+                                <a href="@Url.Action("ForgetPassword","Main")" value="忘記密碼?" style="color:black">
+                                 忘記密碼?
+                                </a>
+                        </div>
+                        <div class="form-group col-12" align="center">
+                            <button type="submit" class="btn btn-primary" align="center">登入</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    <hr />
+</body>
+
+</html>
