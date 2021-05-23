@@ -17,6 +17,7 @@
           <Property Name="Address" Type="nchar" MaxLength="50" />
           <Property Name="Date" Type="datetime" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -31,6 +32,8 @@
           <Property Name="fPrice" Type="int" />
           <Property Name="fIsApproved" Type="nvarchar" MaxLength="50" />
         </EntityType>
+=======
+>>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -53,7 +56,10 @@
         </EntityType>
         <EntityContainer Name="VisitorDataBaseModelStoreContainer">
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+<<<<<<< HEAD
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+=======
+>>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VisitorData" EntityType="Self.VisitorData" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -74,7 +80,10 @@
           <EntitySet Name="VisitorData" EntityType="Self.VisitorData" />
           <EntitySet Name="Order" EntityType="VisitorDataBaseModel.Order" />
           <EntitySet Name="Product" EntityType="VisitorDataBaseModel.Product" />
+<<<<<<< HEAD
           <EntitySet Name="OrderDetail" EntityType="VisitorDataBaseModel.OrderDetail" />
+=======
+>>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
         </EntityContainer>
         <EntityType Name="Order">
           <Key>
@@ -99,6 +108,7 @@
           <Property Name="Img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+<<<<<<< HEAD
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -113,6 +123,8 @@
           <Property Name="fPrice" Type="Int32" />
           <Property Name="fIsApproved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+=======
+>>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -154,6 +166,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+<<<<<<< HEAD
           <EntitySetMapping Name="OrderDetail">
             <EntityTypeMapping TypeName="VisitorDataBaseModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
@@ -169,6 +182,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+=======
+>>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
