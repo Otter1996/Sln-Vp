@@ -28,9 +28,6 @@ namespace VegetablePlatform.Models
         public virtual DbSet<VisitorData> VisitorData { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-<<<<<<< HEAD
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
-=======
->>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
     }
 }

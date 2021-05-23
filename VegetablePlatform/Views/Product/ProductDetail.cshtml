@@ -31,12 +31,8 @@
                 @{
                     if (Model != null)
                     {
-<<<<<<< HEAD
                         <button type="button" class="btn btn-warning" style="margin-top:5px;" 
-                                onclick="location.href = '@Url.Action("AddCar", "Product",new { Pid = Model.Pid })';">
-=======
-                        <button type="button" class="btn btn-warning" style="margin-top:5px;">
->>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
+                                onclick="location.href = '@Url.Action("AddCar", "Product", new { Pid = Model.Pid })';">
                             <img src="~/Images/購物車.png" width="50" height="50">
                             <span class="h3" style="vertical-align:middle;font-weight: bold;">加入購物車</span>
                         </button>
@@ -47,7 +43,7 @@
                     }
                     else
                     {
-                        <button type="button" class="btn btn-warning" style="margin-top:5px;" disabled>
+                        <button type = "button" class="btn btn-warning" style="margin-top:5px;" disabled>
                             <img src="~/Images/購物車.png" width="50" height="50">
                             <span class="h3" style="vertical-align:middle;font-weight: bold; text-decoration:line-through">加入購物車</span>
                         </button>

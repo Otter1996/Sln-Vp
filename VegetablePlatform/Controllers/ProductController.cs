@@ -43,7 +43,6 @@ namespace VegetablePlatform.Controllers
 
         public ActionResult AddCar(string Pid)
         {
-<<<<<<< HEAD
             string UserId =(Session["Member"] as UserData).account;
             VisitorDataBaseEntities db = new VisitorDataBaseEntities();
             var currentCar = db.OrderDetail.Where(m => m.fPid == Pid && m.fIsApproved == "否"
@@ -77,10 +76,8 @@ namespace VegetablePlatform.Controllers
             VisitorDataBaseEntities db = new VisitorDataBaseEntities();
             var orderDetails = db.OrderDetail.Where(m => m.fUserId == fUserId && m.fIsApproved == "否").ToList();
             return View("ShoppingCar", "_LayOutMember", orderDetails);
-=======
             int UserId =(Session["Member"] as UserData).Id;
             return View();
->>>>>>> 2c0725ec11806d2373098ea5edd043f5b09a3d67
         }
     }
 }
