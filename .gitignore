@@ -338,3 +338,7 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+#self-learning record
+在資料表中插入多筆資料.sql
+SQL常見用法.sql
