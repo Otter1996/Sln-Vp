@@ -8,19 +8,15 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
-
-<style>
-    body {
-        background-color: black
-    }
-</style>
+<head>
+    <link href="~/Content/iframe-container.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
     <br><br>
     <p class="h2" style="color:white;margin-top:20px" align="center">常見問題</p><br>
     <!--手風琴-->
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="accordion col-6" id="accordionExample">
+    <div class="row justify-content-center">
+        <div class="accordion col-xl-6 col-lg-6 col-md-8 col-sm-10 co-12" id="accordionExample">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
@@ -48,8 +44,10 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
-                        沒問題!請看以下網路教學。
+                        能!請看以下教學。
+                        <div class="video-container">
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/PMuiaYawDoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,7 +67,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-3"></div>
     </div>
 </body>
 

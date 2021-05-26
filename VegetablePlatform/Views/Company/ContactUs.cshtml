@@ -9,16 +9,14 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
 }
-<style>
-    body {
-        background-color: black
-    }
-</style>
+<head>
+    <link href="~/Content/iframe-container.css" rel="stylesheet" type="text/css" />
+</head>
 <body>
     <br><br>
-    <div class="row">
+    <div class="row justify-content-center">
         <!--關於我們-->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-8">
             <p class="h2" style="color:white;margin-top:20px" align="center">關於我們</p><br>
             <h5 class="Aboutus" style="color:white">
                 濰濰植物網是由長期經營植物的電商集團 ，於2016年推出第一家實體店面 ，對於
@@ -27,9 +25,6 @@
                 2018年集團進軍國際市場、台灣百貨商場、開發中大型單店，短短兩年期間 ，主打高CP值、高品質的植物產品
                 ，並以顧客至上的服務為導向 ，成為代表台灣文化的特色品牌之一。
             </h5>
-        </div>
-        <!--公司地址-->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <p class="h2" style="color:white;margin-top:20px" align="center">公司地址</p><br>
             <h5 class="CompanyAddress" style="color:white">
                 本公司坐落於蓮池潭正中心，因為真的想不到要標哪裡只好標蓮池潭，假設濰濰植物網真的座落於此，如要抵達至本公司可以搭乘
@@ -42,54 +37,53 @@
                 3.火車
                 可搭乘火車到左營站和新左營站下車，之後步行約10分鐘到。
             </h5>
-            <iframe width="600"
-                    height="450"
-                    style="border:0;display:block;margin:auto"
-                    loading="lazy"
-                    allowfullscreen
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDiw_Wen5Pi8chbrT0rJVKPJ3YMU-E1HXQ&q=高雄市蓮池潭">
-            </iframe>
-        </div>
-        <!--聯絡我們-->
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div class="video-container">
+                <iframe width="600"
+                        height="450"
+                        style="border:0;display:block;margin:auto"
+                        loading="lazy"
+                        allowfullscreen
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDiw_Wen5Pi8chbrT0rJVKPJ3YMU-E1HXQ&q=高雄市蓮池潭">
+                </iframe>
+            </div>
             <p class="h2" style="color:white;margin-top:20px" align="center">聯絡我們</p><br>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                 <!--電子郵件-->
-                 <div class="col">
-                        <div class="card" style="max-width: 400px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
+                <div class="col">
+                    <div class="card" style="max-width: 400px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <a href="mailto: fake_email_address@gmail.com">
+                                    <img src="~/Images/Email.png" class="card-img-top" alt="...">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
                                     <a href="mailto: fake_email_address@gmail.com">
-                                        <img src="~/Images/Email.png" class="card-img-top" alt="...">
+                                        <h5 class="card-title">電子郵件</h5>
                                     </a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <a href="mailto: fake_email_address@gmail.com">
-                                            <h5 class="card-title">電子郵件</h5>
-                                        </a>
-                                        <p class="card-text">
-                                            請將您的寶貴意見以填寫表單方式送出，
-                                            我們將於工作日由專人以郵件回覆您的問題。
-                                        </p>
-                                    </div>
+                                    <p class="card-text">
+                                        請將您的寶貴意見以填寫表單方式送出，
+                                        我們將於工作日由專人以郵件回覆您的問題。
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 <!--數位客服-->
                 <div class="col">
                     <div class="card" style="max-width: 400px;">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <a href="#">
-                                <img src="~/Images/CustomerService.png" class="card-img-top" alt="...">
+                                    <img src="~/Images/CustomerService.png" class="card-img-top" alt="...">
                                 </a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <a href="#">
-                                    <h5 class="card-title">數位客服</h5>
+                                        <h5 class="card-title">數位客服</h5>
                                     </a>
                                     <p class="card-text">
                                         供更加值且即時的服務，服務範圍包括高鐵營運相關問題諮詢及個人化服務申請與查詢。<hr>
@@ -106,13 +100,13 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <a href="tel:+886-918******">
-                                <img src="~/Images/PhoneNumber.png" class="card-img-top" alt="...">
+                                    <img src="~/Images/PhoneNumber.png" class="card-img-top" alt="...">
                                 </a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <a href="tel:+886-918******">
-                                    <h5 class="card-title">客服專線</h5>
+                                        <h5 class="card-title">客服專線</h5>
                                     </a>
                                     <p class="card-text">以上為付費電話，依一般市話及行動電話費率標準計費。</p>
                                 </div>

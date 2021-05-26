@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<VegetablePlatform.Models.Product>
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<style>
-    body {
-        background-color: black
+@{ 
+    if (Session["Member"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutMember.cshtml";
     }
-</style>
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
 <div class="row">
     @foreach (var item in Model)
     {

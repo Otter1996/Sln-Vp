@@ -7,9 +7,6 @@
 <link href="~/Content/plus_minus_counter.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/jquery-3.0.0.js"></script>
 <style>
-    body {
-        background-color: black;
-    }
     th,td{
         color:white;
     }
@@ -72,12 +69,29 @@
                     @Html.DisplayFor(modelItem => item.fIsApproved)
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-primary">刪除</button>
+                    <button type="submit" class="btn btn-primary" onclick="location.href = '@Url.Action("DeleteCar", "Product", new { Pid = item.fPid })'">刪除</button>
                 </td>
             </tr>
         }
-
     </table>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-3">
+            <h2 style="color:white">
+                總金額:
+                @{
+                    int total = 0;
+                    foreach (var item in Model)
+                    {
+                        total += Convert.ToInt32(item.fPrice * item.fQty);
+                    }
+                }
+                @total
+                元
+            </h2>
+            <button type="submit" class="btn btn-primary" onclick="location.href = '@Url.Action("ShoppingInformation","Product")'">前往結帳</button>
+        </div>
+    </div>
 </body>
 <script>
     $(document).ready(function () {

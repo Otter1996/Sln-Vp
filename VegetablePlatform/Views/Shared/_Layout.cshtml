@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <title>濰濰植物網</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/site.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body>
@@ -49,7 +50,7 @@
                         </div>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">訂單查詢</a>
+                        <a class="nav-link" href="#" onclick="alert('請先登入再進行訂單查詢')">訂單查詢</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="@Url.Action("CommonQuestion","Company")">常見問題</a>
@@ -62,7 +63,7 @@
                         &ensp;&ensp;&ensp;&ensp;&ensp;
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")" target="_blank">
+                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")" target="_blank" autocomplete="off">
                     <input class="form-control mr-sm-2" type="search" placeholder="找什麼植物嗎?" aria-label="Search" id="productname" name="productname">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btn-search">搜尋</button>
                 </form>
@@ -105,21 +106,6 @@
 
     <script src="~/Scripts/jquery-3.0.0.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/searchinformation.js"></script>
 </body>
 </html>
-<script>
-    let name = document.getElementById('productname');
-    document.getElementById("btn-search").addEventListener('click', function (){
-        if (name.value.length > 10) {
-            alert('不可以輸入超過10個字，請重新搜尋。');
-            name.value = '';
-            event.preventDefault();
-        }
-        else if (name.value.length < 2)
-        {
-            alert('不可以輸入少於2個字，請重新搜尋。');
-            name.value = '';
-            event.preventDefault();
-        }
-    });
-</script>

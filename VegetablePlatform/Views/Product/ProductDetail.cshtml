@@ -1,15 +1,15 @@
 ﻿@model VegetablePlatform.Models.Product
 
-@{
+@if(Session["member"] != null)
+{
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+else
+{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/plus_minus_counter.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/jquery-3.0.0.js"></script>
-<style>
-    body {
-        background-color: black
-    }
-</style>
 
 <body>
     <div class="container-fluid body-content">
@@ -31,7 +31,7 @@
                 @{
                     if (Model != null)
                     {
-                        <button type="button" class="btn btn-warning" style="margin-top:5px;" 
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;"
                                 onclick="location.href = '@Url.Action("AddCar", "Product", new { Pid = Model.Pid })';">
                             <img src="~/Images/購物車.png" width="50" height="50">
                             <span class="h3" style="vertical-align:middle;font-weight: bold;">加入購物車</span>
@@ -43,7 +43,7 @@
                     }
                     else
                     {
-                        <button type = "button" class="btn btn-warning" style="margin-top:5px;" disabled>
+                        <button type="button" class="btn btn-warning" style="margin-top:5px;" disabled>
                             <img src="~/Images/購物車.png" width="50" height="50">
                             <span class="h3" style="vertical-align:middle;font-weight: bold; text-decoration:line-through">加入購物車</span>
                         </button>
@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-</body> 
+</body>
 <script>
     $(document).ready(function () {
         $('.minus').click(function () {

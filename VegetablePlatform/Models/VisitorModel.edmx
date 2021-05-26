@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderGuid" Type="nchar" MaxLength="50" />
           <Property Name="UserId" Type="nchar" MaxLength="50" />
           <Property Name="Receiver" Type="nchar" MaxLength="50" />
@@ -21,8 +21,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="fid" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fOrderGuid" Type="nvarchar" MaxLength="50" />
           <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
           <Property Name="fPid" Type="nvarchar" MaxLength="50" />
@@ -104,7 +103,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="fid" Type="Int32" />
           <Property Name="fOrderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="fPid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -164,7 +162,6 @@
                 <ScalarProperty Name="fPid" ColumnName="fPid" />
                 <ScalarProperty Name="fUserId" ColumnName="fUserId" />
                 <ScalarProperty Name="fOrderGuid" ColumnName="fOrderGuid" />
-                <ScalarProperty Name="fid" ColumnName="fid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

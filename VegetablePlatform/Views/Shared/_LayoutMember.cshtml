@@ -1,18 +1,17 @@
 ﻿<!DOCTYPE html>
+
 <html lang="zh-Hant-TW">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <title>濰濰植物網</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/site.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
-
-
 </head>
 <body>
-
     <div class="container-fluid body-content">
         <!--導覽列-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -51,25 +50,25 @@
                         </div>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">訂單查詢</a>
+                        <a class="nav-link" href="@Url.Action("OrderList","Product")">訂單查詢</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">常見問題</a>
+                        <a class="nav-link" href="@Url.Action("CommonQuestion","Company")">常見問題</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="@Url.Action("ContactUs","Company")">聯絡我們</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">購物車<img src="~/Images/Yellow shoppingcar.png" width="20" height="20"></a>
+                        <a class="nav-link" href="@Url.Action("ShoppingCar","Product")">購物車<img src="~/Images/Yellow shoppingcar.png" width="20" height="20"></a>
                     </li>
                     <!--增加間距-->
                     <li>
                         &ensp;&ensp;&ensp;&ensp;&ensp;
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")">
-                    <input class="form-control mr-sm-2" name="search" type="search" placeholder="找什麼植物嗎?" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
+                <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")" target="_blank" autocomplete="off">
+                    <input class="form-control mr-sm-2" type="search" placeholder="找什麼植物嗎?" aria-label="Search" id="productname" name="productname">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="btn-search">搜尋</button>
                 </form>
             </div>
         </nav>
@@ -109,7 +108,7 @@
     </div>
 
     <script src="~/Scripts/jquery-3.0.0.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/searchinformation.js"></script>
 </body>
 </html>

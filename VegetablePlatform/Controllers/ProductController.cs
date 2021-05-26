@@ -15,7 +15,7 @@ namespace VegetablePlatform.Controllers
         {
             VisitorDataBaseEntities db = new VisitorDataBaseEntities();
             var Products= db.Product.Where(m => m.Pid.Contains(name)).ToList();
-            return View("ProductIndex","_Layout",Products);
+            return View("ProductIndex",Products);
         }
 
         public ActionResult ReadDetail(string Pid)
@@ -40,44 +40,131 @@ namespace VegetablePlatform.Controllers
                 return View("ProductDetail", "_Layout");
             }
         }
-
+        /// <summary>
+        /// 新增產品至購物車
+        /// </summary>
+        /// <param name="Pid"></param>
+        /// <returns></returns>
         public ActionResult AddCar(string Pid)
         {
-            string UserId =(Session["Member"] as UserData).account;
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
-            var currentCar = db.OrderDetail.Where(m => m.fPid == Pid && m.fIsApproved == "否"
-                                && m.fUserId == UserId).FirstOrDefault();
-            if (currentCar == null)
+            if (Session["Member"] == null)
             {
-                //選出目前的產品，並指定給product
-                var product = db.Product.Where(m => m.Pid == Pid).FirstOrDefault();
-                //將產品放入訂單明細，因為產品fIsApproved為"否"，代表為購物車狀態
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.fUserId = UserId;
-                orderDetail.fPid = product.Pid;
-                orderDetail.fName = product.Name;
-                orderDetail.fPrice = product.Price;
-                orderDetail.fQty = 1;
-                orderDetail.fIsApproved = "否";
-                db.OrderDetail.Add(orderDetail);
+                return RedirectToAction("Login","Main");
             }
             else
             {
-                //若產品已在購物車狀態則將數量+1
-                currentCar.fQty += 1;
+                string UserId =(Session["Member"] as UserData).account;
+                VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+                var currentCar = db.OrderDetail.Where(m => m.fPid == Pid && m.fIsApproved == "否"
+                                    && m.fUserId == UserId).FirstOrDefault();
+                if (currentCar == null)
+                {
+                    //選出目前的產品，並指定給product
+                    var product = db.Product.Where(m => m.Pid == Pid).FirstOrDefault();
+                    //將產品放入訂單明細，因為產品fIsApproved為"否"，代表為購物車狀態
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.fUserId = UserId;
+                    orderDetail.fPid = product.Pid;
+                    orderDetail.fName = product.Name;
+                    orderDetail.fPrice = product.Price;
+                    orderDetail.fQty = 1;
+                    orderDetail.fIsApproved = "否";
+                    db.OrderDetail.Add(orderDetail);
+                }
+                else
+                {
+                    //若產品已在購物車狀態則將數量+1
+                    currentCar.fQty += 1;
+                }
+            
+                db.SaveChanges();
+                return RedirectToAction("ShoppingCar");
             }
-            db.SaveChanges();
-            return RedirectToAction("ShoppingCar");
+            
         }
-
+        /// <summary>
+        /// 購物車清單
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShoppingCar()
         {
             string fUserId = (Session["Member"] as UserData).account;
             VisitorDataBaseEntities db = new VisitorDataBaseEntities();
             var orderDetails = db.OrderDetail.Where(m => m.fUserId == fUserId && m.fIsApproved == "否").ToList();
             return View("ShoppingCar", "_LayOutMember", orderDetails);
-            int UserId =(Session["Member"] as UserData).Id;
-            return View();
+        }
+        /// <summary>
+        /// 刪除購物車
+        /// </summary>
+        /// <param name="Pid"></param>
+        /// <returns></returns>
+        public ActionResult DeleteCar(string Pid)
+        {
+            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            var orderDetail = db.OrderDetail.Where(m => m.fPid == Pid).FirstOrDefault();
+            db.OrderDetail.Remove(orderDetail);
+            db.SaveChanges();
+            return RedirectToAction("ShoppingCar");
+        }
+
+        public ActionResult ShoppingInformation()
+        {
+            return View("ShoppingInformation");
+        }
+        /// <summary>
+        /// 結帳
+        /// </summary>
+        /// <param name="fReciever"></param>
+        /// <param name="fEmail"></param>
+        /// <param name="fAddress"></param>
+        [HttpPost]
+        public ActionResult Check(string fReciever, string fEmail, string fAddress)
+        {
+            string fUserId = (Session["Member"] as UserData).account;
+            string guid = Guid.NewGuid().ToString();//建立唯一辨識值並指定給guid變數
+            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            Order order = new Order
+            {
+                OrderGuid = guid,
+                UserId = fUserId,
+                Receiver = fReciever,
+                Email = fEmail,
+                Address = fAddress,
+                Date = DateTime.Now
+            };
+            db.Order.Add(order);
+
+            var carlist = db.OrderDetail.Where(m => m.fIsApproved == "否" && m.fUserId == fUserId).ToList();
+            foreach (var item in carlist)
+            {
+                item.fOrderGuid = guid;
+                item.fIsApproved = "是";
+            }
+            db.SaveChanges();
+            return RedirectToAction("OrderList");
+        }
+        /// <summary>
+        /// 返回會員訂單列表
+        /// </summary>
+        /// <returns>orders</returns>
+        public ActionResult OrderList()
+        {
+            string fUserId = (Session["Member"] as UserData).account;
+            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            var orders = db.Order.Where(m => m.UserId == fUserId).OrderByDescending(m => m.Date).ToList();
+            return View("OrderList", "_LayoutMember", orders);
+
+        }
+        /// <summary>
+        /// 返回該筆訂單明細
+        /// </summary>
+        /// <param name="OrderGuid"></param>
+        /// <returns>orderDetails</returns>
+        public ActionResult OrderDetail(string OrderGuid)
+        {
+            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            var orderDetails = db.OrderDetail.Where(m => m.fOrderGuid == OrderGuid).ToList();
+            return View("OrderDetail", "_LayoutMember", orderDetails);
         }
     }
 }

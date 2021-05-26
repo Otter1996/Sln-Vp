@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "ShoppingInformation";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+<style>
+    label,h2 {
+        color:white;
+    }
+</style>
+
+<body>
+<form action="@Url.Action("Check","Product")" method="post">
+    <br><br>
+    <h2>填寫訂單收件人資料</h2>
+    <hr />
+    <div class="mb-3">
+        <label class="form-label">收件人姓名</label>
+        <input type="text" class="form-control" id="#" name="fReciever">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">收件人信箱</label>
+        <input type="email" class="form-control" id="#" name="fEmail">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">收件人地址</label>
+        <input type="text" class="form-control" id="" aria-describedby="AddressHelp" name="fAddress">
+        <div id="AddressHelp" class="form-text" style="color:white">請確實填寫收件地址，貨品寄出除有瑕疵蓋不退貨。</div>
+    </div>
+    <button type="submit" class="btn btn-primary">確認訂單</button>
+</form>
+</body>
+
