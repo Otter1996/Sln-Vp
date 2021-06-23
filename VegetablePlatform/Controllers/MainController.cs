@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using VegetablePlatform.Models;
+using VegetablePlatform.BusinessLogic;
 
 namespace VegetablePlatform.Controllers
 {
@@ -41,19 +42,19 @@ namespace VegetablePlatform.Controllers
             Session.Clear();
             return View("Main");
         }
-
+        /// <summary>
+        /// 登入機制
+        /// </summary>
         [HttpPost]
         public ActionResult Login(string UserId, string UserPassword)
         {
-            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
-            var member = db.UserData.Where(m => m.account == UserId && m.password == UserPassword).FirstOrDefault();
-            if (member == null)
+            LoginLogic login = new LoginLogic();
+            bool state = login.IsSuccessLogin(UserId, UserPassword);
+            if (state == false)
             {
                 ViewBag.Message = "登入失敗，請重新輸入";
-                return View();
+                return View("Login");
             }
-            Session["WelCome"] = member.name + "，歡迎光臨";
-            Session["Member"] = member;
             return RedirectToAction("Main");
         }
         public ActionResult ForgetPassword()
@@ -214,24 +215,5 @@ namespace VegetablePlatform.Controllers
 
     }
 
-    /// <summary>
-    /// 自定義不同按鈕選擇Action
-    /// </summary>
-    public class MultiButtonAttribute : ActionNameSelectorAttribute
-    {
-        public string Name { get; set; }
-        public MultiButtonAttribute(string name)
-        {
-            this.Name = name;
-        }
-        public override bool IsValidName(ControllerContext controllerContext,
-            string actionName, System.Reflection.MethodInfo methodInfo)
-        {
-            if (string.IsNullOrEmpty(this.Name))
-            {
-                return false;
-            }
-            return controllerContext.HttpContext.Request.Form.AllKeys.Contains(this.Name);
-        }
-    }
+   
 }
