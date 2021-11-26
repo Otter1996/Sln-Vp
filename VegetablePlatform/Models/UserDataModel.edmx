@@ -4,7 +4,49 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="UserDataBaseEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="UserDataBaseEntitiesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderGuid" Type="nchar" MaxLength="50" />
+          <Property Name="UserId" Type="nchar" MaxLength="50" />
+          <Property Name="Receiver" Type="nchar" MaxLength="50" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Address" Type="nchar" MaxLength="50" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPid" Type="nvarchar" MaxLength="50" />
+          <Property Name="fName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fQty" Type="int" />
+          <Property Name="fPrice" Type="int" />
+          <Property Name="fIsApproved" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Pid" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductDescription">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img_1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Detail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="UserActivation">
           <Key>
             <PropertyRef Name="email" />
@@ -20,15 +62,28 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="account" Type="nvarchar" MaxLength="50" />
           <Property Name="password" Type="nvarchar" MaxLength="50" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="emailverify" Type="bit" Nullable="false" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="phoneverify" Type="bit" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="birthday" Type="datetime" />
+          <Property Name="group" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Product__Pid__0880433F">
+          <End Role="ProductDescription" Type="Self.ProductDescription" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDescription">
+              <PropertyRef Name="Product_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Id">
-          <End Role="UserActivation" Type="Self.UserActivation" Multiplicity="0..1" />
+          <End Role="UserActivation" Type="Self.UserActivation" Multiplicity="1" />
           <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserActivation">
@@ -40,17 +95,79 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="UserDataBaseEntitiesModelStoreContainer">
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDescription" EntityType="Self.ProductDescription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserActivation" EntityType="Self.UserActivation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Product__Pid__0880433F" Association="Self.FK__Product__Pid__0880433F">
+            <End Role="ProductDescription" EntitySet="ProductDescription" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
           <AssociationSet Name="Id" Association="Self.Id">
             <End Role="UserActivation" EntitySet="UserActivation" />
             <End Role="UserData" EntitySet="UserData" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UserDataBaseEntitiesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderGuid" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="UserId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Receiver" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fQty" Type="Int32" />
+          <Property Name="fPrice" Type="Int32" />
+          <Property Name="fIsApproved" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Pid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="ProductDescription" Relationship="Self.FK__Product__Pid__0880433F" FromRole="Product" ToRole="ProductDescription" />
+        </EntityType>
+        <EntityType Name="ProductDescription">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Img_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Pid__0880433F" FromRole="ProductDescription" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="UserActivation">
+          <Key>
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActivationCode" Type="Guid" />
+          <Property Name="Random" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="UserData" Relationship="Self.Id" FromRole="UserActivation" ToRole="UserData" />
+        </EntityType>
         <EntityType Name="UserData">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,34 +175,30 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="emailverify" Type="Boolean" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phoneverify" Type="Boolean" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="birthday" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UserActivation1" Relationship="UserDataBaseEntitiesModel.Id1" FromRole="UserData" ToRole="UserActivation" />
+          <Property Name="group" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserActivation" Relationship="Self.Id" FromRole="UserData" ToRole="UserActivation" />
         </EntityType>
-        <EntityContainer Name="UserDataBaseEntitiesEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserData" EntityType="Self.UserData" />
-          <EntitySet Name="UserActivation" EntityType="UserDataBaseEntitiesModel.UserActivation" />
-          <AssociationSet Name="Id1" Association="UserDataBaseEntitiesModel.Id1">
-            <End Role="UserActivation" EntitySet="UserActivation" />
-            <End Role="UserData" EntitySet="UserData" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="UserActivation">
-          <Key>
-            <PropertyRef Name="email" />
-          </Key>
-          <Property Name="ActivationCode" Type="Guid" />
-          <Property Name="Random" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserData1" Relationship="UserDataBaseEntitiesModel.Id1" FromRole="UserActivation" ToRole="UserData" />
-        </EntityType>
-        <Association Name="Id1">
-          <End Type="UserDataBaseEntitiesModel.UserActivation" Role="UserActivation" Multiplicity="0..1" />
-          <End Type="UserDataBaseEntitiesModel.UserData" Role="UserData" Multiplicity="*" />
+        <Association Name="FK__Product__Pid__0880433F">
+          <End Role="ProductDescription" Type="Self.ProductDescription" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductDescription">
+              <PropertyRef Name="Product_id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Id">
+          <End Role="UserActivation" Type="Self.UserActivation" Multiplicity="1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserActivation">
               <PropertyRef Name="email" />
@@ -95,16 +208,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="UserDataBaseEntitiesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductDescription" EntityType="Self.ProductDescription" />
+          <EntitySet Name="UserActivation" EntityType="Self.UserActivation" />
+          <EntitySet Name="UserData" EntityType="Self.UserData" />
+          <AssociationSet Name="FK__Product__Pid__0880433F" Association="Self.FK__Product__Pid__0880433F">
+            <End Role="ProductDescription" EntitySet="ProductDescription" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="Id" Association="Self.Id">
+            <End Role="UserActivation" EntitySet="UserActivation" />
+            <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UserDataBaseEntitiesModelStoreContainer" CdmEntityContainer="UserDataBaseEntitiesEntities">
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderGuid" ColumnName="OrderGuid" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetail">
+            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fOrderGuid" ColumnName="fOrderGuid" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fPid" ColumnName="fPid" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fQty" ColumnName="fQty" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+                <ScalarProperty Name="fIsApproved" ColumnName="fIsApproved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDescription">
+            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.ProductDescription">
+              <MappingFragment StoreEntitySet="ProductDescription">
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Img_1" ColumnName="Img_1" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActivation">
+            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.UserActivation">
+              <MappingFragment StoreEntitySet="UserActivation">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="Random" ColumnName="Random" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserData">
             <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.UserData">
               <MappingFragment StoreEntitySet="UserData">
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="account" ColumnName="account" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -113,15 +296,8 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="phoneverify" ColumnName="phoneverify" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserActivation">
-            <EntityTypeMapping TypeName="UserDataBaseEntitiesModel.UserActivation">
-              <MappingFragment StoreEntitySet="UserActivation">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="Random" ColumnName="Random" />
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="group" ColumnName="group" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,7 +18,7 @@ namespace VegetablePlatform.Models
         public string Pid { get; set; }
         public string Name { get; set; }
         public Nullable<int> Price { get; set; }
-        public string Img { get; set; }
-        public string Detail { get; set; }
+    
+        public virtual ProductDescription ProductDescription { get; set; }
     }
 }

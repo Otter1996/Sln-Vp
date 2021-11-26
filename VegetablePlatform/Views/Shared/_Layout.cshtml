@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="~/Images/favicon.ico">
-    <title>濰濰植物網</title>
+    <title>菜鳥園藝</title>
+    <!--CSS-->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/site.css" rel="stylesheet" />
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @RenderSection("AddToHead",required: false)
 </head>
 <body>
 
@@ -18,7 +19,7 @@
             <!--品牌圖示-->
             <a class="navbar-brand" href="@Url.Action("Main","Main")">
                 <img src="~/Images/Logo.png" width="30" height="30" alt="">
-                <span class="h3" style="vertical-align:middle;font-weight: bold;">濰濰植物網</span>
+                <span class="h3" style="vertical-align:middle;font-weight: bold;">菜鳥園藝</span>
             </a>
             <!--縮小按鈕圖示-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,9 +59,8 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="@Url.Action("ContactUs","Company")">聯絡我們</a>
                     </li>
-                    <!--增加間距-->
                     <li>
-                        &ensp;&ensp;&ensp;&ensp;&ensp;
+                        <pre> </pre>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" method="get" action="@Url.Action("Search","Main")" target="_blank" autocomplete="off">
@@ -100,12 +100,14 @@
                 </div>
                 <div class="col-sm-0 col-md-6 col-lg-1 col-xl-1"></div>
             </div>
-            <p>&copy; @DateTime.Now.Year - JaWei ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - 菜鳥園藝 ASP.NET Application</p>
         </footer>
     </div>
-
+    <!--script-->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/jquery-3.0.0.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/searchinformation.js"></script>
+    @RenderSection("RenderScript", false);
 </body>
 </html>

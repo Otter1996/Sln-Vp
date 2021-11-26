@@ -1,0 +1,14 @@
+﻿@{
+    /*
+    _ViewStart可以取代每一次都在View中設定layout的問題。
+    流程是_ViewStart -> Which layout -> view。
+    */
+    if (User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_LayoutMember.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}

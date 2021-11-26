@@ -11,25 +11,16 @@ namespace VegetablePlatform.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class OrderDetail
     {
-        [DisplayName("自動編號")]
         public int Id { get; set; }
-        [DisplayName("訂單編號")]
         public string fOrderGuid { get; set; }
-        [DisplayName("帳號")]
         public string fUserId { get; set; }
-        [DisplayName("產品編號")]
         public string fPid { get; set; }
-        [DisplayName("產品名稱")]
         public string fName { get; set; }
-        [DisplayName("數量")]
         public Nullable<int> fQty { get; set; }
-        [DisplayName("單價")]
         public Nullable<int> fPrice { get; set; }
-        [DisplayName("是否為訂單")]
         public string fIsApproved { get; set; }
     }
 }

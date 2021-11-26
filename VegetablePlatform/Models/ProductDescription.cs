@@ -12,19 +12,19 @@ namespace VegetablePlatform.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserActivation
+    public partial class ProductDescription
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserActivation()
+        public ProductDescription()
         {
-            this.UserData = new HashSet<UserData>();
+            this.Product = new HashSet<Product>();
         }
     
-        public string email { get; set; }
-        public Nullable<System.Guid> ActivationCode { get; set; }
-        public string Random { get; set; }
+        public string Product_id { get; set; }
+        public string Img_1 { get; set; }
+        public string Detail { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserData> UserData { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

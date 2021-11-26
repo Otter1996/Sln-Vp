@@ -4,10 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="220837b534fc44c499d9e78264a6357d" Name="Diagram1">
-        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.UserData" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.UserActivation" Width="1.5" PointX="2.875" PointY="1" />
-        <AssociationConnector Association="UserDataBaseEntitiesModel.Id1" />
+      <Diagram DiagramId="830311af946540f6b197a72f6ef38212" Name="Diagram1">
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.Order" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.OrderDetail" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.Product" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.ProductDescription" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.UserActivation" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataBaseEntitiesModel.UserData" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="UserDataBaseEntitiesModel.FK__Product__Pid__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataBaseEntitiesModel.Id" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

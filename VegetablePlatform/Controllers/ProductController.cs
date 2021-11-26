@@ -13,25 +13,27 @@ namespace VegetablePlatform.Controllers
         // GET: Product
         public ActionResult ProductIndex(string name)
         {
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var Products= db.Product.Where(m => m.Pid.Contains(name)).ToList();
             return View("ProductIndex",Products);
         }
 
         public ActionResult ReadDetail(string Pid)
         {
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             try
             {
                 var Product = db.Product.Where(m => m.Pid.Contains(Pid)).FirstOrDefault();
-                string path = @"C:\MVC\slnVP\VegetablePlatform\Txt\" + Product.Detail;
+                ViewBag.Message = Product.ProductDescription.Detail;
+                /*string path = @"C:\MVC\slnVP\VegetablePlatform\Txt\" + Product.Detail;
                 using (StreamReader sr = new StreamReader(path))
                 {
                     string line = "";
                     line = sr.ReadToEnd();
                     ViewBag.Message = line;
-                    return View("ProductDetail", "_Layout",Product);
-                }
+                    return View("ProductDetail",Product);
+                }*/
+                return View("ProductDetail", Product);
             }
             catch (Exception ex)
             {
@@ -54,7 +56,7 @@ namespace VegetablePlatform.Controllers
             else
             {
                 string UserId =(Session["Member"] as UserData).account;
-                VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+                UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
                 var currentCar = db.OrderDetail.Where(m => m.fPid == Pid && m.fIsApproved == "否"
                                     && m.fUserId == UserId).FirstOrDefault();
                 if (currentCar == null)
@@ -88,8 +90,8 @@ namespace VegetablePlatform.Controllers
         /// <returns></returns>
         public ActionResult ShoppingCar()
         {
-            string fUserId = (Session["Member"] as UserData).account;
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            string fUserId = User.Identity.Name;
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var orderDetails = db.OrderDetail.Where(m => m.fUserId == fUserId && m.fIsApproved == "否").ToList();
             return View("ShoppingCar", "_LayOutMember", orderDetails);
         }
@@ -100,7 +102,7 @@ namespace VegetablePlatform.Controllers
         /// <returns></returns>
         public ActionResult DeleteCar(string Pid)
         {
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var orderDetail = db.OrderDetail.Where(m => m.fPid == Pid).FirstOrDefault();
             db.OrderDetail.Remove(orderDetail);
             db.SaveChanges();
@@ -120,9 +122,9 @@ namespace VegetablePlatform.Controllers
         [HttpPost]
         public ActionResult Check(string fReciever, string fEmail, string fAddress)
         {
-            string fUserId = (Session["Member"] as UserData).account;
+            string fUserId = User.Identity.Name;
             string guid = Guid.NewGuid().ToString();//建立唯一辨識值並指定給guid變數
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             Order order = new Order
             {
                 OrderGuid = guid,
@@ -149,8 +151,8 @@ namespace VegetablePlatform.Controllers
         /// <returns>orders</returns>
         public ActionResult OrderList()
         {
-            string fUserId = (Session["Member"] as UserData).account;
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            string fUserId = User.Identity.Name;
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var orders = db.Order.Where(m => m.UserId == fUserId).OrderByDescending(m => m.Date).ToList();
             return View("OrderList", "_LayoutMember", orders);
 
@@ -162,7 +164,7 @@ namespace VegetablePlatform.Controllers
         /// <returns>orderDetails</returns>
         public ActionResult OrderDetail(string OrderGuid)
         {
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var orderDetails = db.OrderDetail.Where(m => m.fOrderGuid == OrderGuid).ToList();
             return View("OrderDetail", "_LayoutMember", orderDetails);
         }

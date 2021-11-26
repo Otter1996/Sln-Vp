@@ -1,15 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "ShoppingInformation";
-    Layout = "~/Views/Shared/_LayoutMember.cshtml";
 }
-<style>
-    label,h2 {
-        color:white;
-    }
-</style>
-
-<body>
+@section AddToHead{
+    <link href="~/Content/shoppinginformation.css" rel="stylesheet" />
+}
 <form action="@Url.Action("Check","Product")" method="post">
     <br><br>
     <h2>填寫訂單收件人資料</h2>
@@ -29,5 +24,4 @@
     </div>
     <button type="submit" class="btn btn-primary">確認訂單</button>
 </form>
-</body>
 

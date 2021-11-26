@@ -23,7 +23,8 @@ namespace VegetablePlatform.Models
         public bool phoneverify { get; set; }
         public string name { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
+        public int group { get; set; }
     
-        public virtual UserActivation UserActivation1 { get; set; }
+        public virtual UserActivation UserActivation { get; set; }
     }
 }

@@ -11,22 +11,15 @@ namespace VegetablePlatform.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
+    
     public partial class Order
     {
-        [DisplayName("自動編號")]
         public int Id { get; set; }
-        [DisplayName("訂單編號")]
         public string OrderGuid { get; set; }
-        [DisplayName("帳號")]
         public string UserId { get; set; }
-        [DisplayName("收件人")]
         public string Receiver { get; set; }
-        [DisplayName("收件人信箱")]
         public string Email { get; set; }
-        [DisplayName("收件人地址")]
         public string Address { get; set; }
-        [DisplayName("訂單成立時間")]
         public Nullable<System.DateTime> Date { get; set; }
     }
 }

@@ -25,7 +25,11 @@ namespace VegetablePlatform.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<UserData> UserData { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<ProductDescription> ProductDescription { get; set; }
         public virtual DbSet<UserActivation> UserActivation { get; set; }
+        public virtual DbSet<UserData> UserData { get; set; }
     }
 }

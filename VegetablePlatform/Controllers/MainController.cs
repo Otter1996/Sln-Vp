@@ -6,6 +6,8 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using VegetablePlatform.Models;
 using VegetablePlatform.BusinessLogic;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace VegetablePlatform.Controllers
 {
@@ -39,7 +41,8 @@ namespace VegetablePlatform.Controllers
         /// <returns></returns>
         public ActionResult Logout()
         {
-            Session.Clear();
+            FormsAuthentication.SignOut();
+            HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
             return View("Main");
         }
         /// <summary>
@@ -49,13 +52,18 @@ namespace VegetablePlatform.Controllers
         public ActionResult Login(string UserId, string UserPassword)
         {
             LoginLogic login = new LoginLogic();
-            bool state = login.IsSuccessLogin(UserId, UserPassword);
-            if (state == false)
+            UserData LoginUser = login.IsSuccessLogin(UserId, HashFunction.Hashfun(UserPassword));
+            if (LoginUser == null)
             {
                 ViewBag.Message = "登入失敗，請重新輸入";
                 return View("Login");
             }
-            return RedirectToAction("Main");
+            else
+            {
+                AuthenticationUserAndWriteIntoCookie(LoginUser);
+                return RedirectToAction("Main");
+            }
+            
         }
         public ActionResult ForgetPassword()
         {
@@ -79,10 +87,10 @@ namespace VegetablePlatform.Controllers
                 .Where(m => m.account == account && m.email == email).FirstOrDefault();
             if (member != null)
             {
-                if (post["Verify"] == member.UserActivation1.Random)
+                if (post["Verify"] == member.UserActivation.Random)
                 {
                     member.password = newpassword;
-                    member.UserActivation1.Random = null;
+                    member.UserActivation.Random = null;
                     db.SaveChanges();
 
                     ViewBag.ChangePassword = "更改密碼成功!";
@@ -91,7 +99,7 @@ namespace VegetablePlatform.Controllers
                 else
                 {
                     ViewBag.ChangePassword = "輸入驗證碼錯誤，請重新傳送驗證碼。";
-                    member.UserActivation1.Random = null;
+                    member.UserActivation.Random = null;
                     return View();
                 }
 
@@ -145,9 +153,10 @@ namespace VegetablePlatform.Controllers
         public ActionResult Register(UserData userdata)
         {
             UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
-            var member = db.UserData.Where(m => m.account == userdata.account && m.password == userdata.password).FirstOrDefault();
+            var member = db.UserData.Where(m => m.account == userdata.account && HashFunction.Hashfun(m.password) == userdata.password).FirstOrDefault();
             if (member == null)
             {
+                userdata.password = HashFunction.Hashfun(userdata.password);
                 db.UserData.Add(userdata);
                 SendEmail(userdata.email);
                 db.SaveChanges();
@@ -163,7 +172,7 @@ namespace VegetablePlatform.Controllers
         /// <returns>Activation的View</returns>
         public ActionResult Activation()
         {
-            ViewBag.Message = "驗證失敗，就跟我的人生一樣";
+            ViewBag.Message = "驗證失敗";
             if (RouteData.Values["id"] != null)
             {
                 Guid activationCode = new Guid(RouteData.Values["id"].ToString());
@@ -178,7 +187,6 @@ namespace VegetablePlatform.Controllers
                     db.SaveChanges();
                 }
             }
-
             return View("Activation");
         }
         /// <summary>
@@ -207,10 +215,42 @@ namespace VegetablePlatform.Controllers
         [HttpGet]
         public ActionResult Search(string productname)
         {
-            VisitorDataBaseEntities db = new VisitorDataBaseEntities();
+            UserDataBaseEntitiesEntities db = new UserDataBaseEntitiesEntities();
             var product = (from x in db.Product where x.Name.Contains(productname) select x);
             var productlist = product.ToList();
             return View("SearchResult", productlist);
+        }
+        /// <summary>
+        /// 使用Authetication做出登入機制
+        /// </summary>
+        /// <param name="LoginUser"></param>
+        public void AuthenticationUserAndWriteIntoCookie(UserData LoginUser)
+        {
+            DateTime DTnow = DateTime.Now;
+            var authTicket = new FormsAuthenticationTicket(   // 登入成功，取得門票 (票證)。請自行填寫以下資訊。
+                version: 1,   //版本號（Ver.）
+                name: LoginUser.account, // ***自行放入資料（如：使用者帳號、真實名稱）
+                issueDate: DTnow,  // 登入成功後，核發此票證的本機日期和時間（資料格式 DateTime）
+                expiration: DTnow.AddDays(1),  //  "一天"內都有效（票證到期的本機日期和時間。）
+                isPersistent: true,  // 記住我？ true or false（畫面上通常會用 CheckBox表示）
+
+                userData: Convert.ToString(LoginUser.group),   // ***自行放入資料（如：會員權限、等級、群組） 
+                                    // 與票證一起存放的使用者特定資料。
+                                    // 需搭配 Global.asax設定檔 - Application_AuthenticateRequest事件。
+                cookiePath: FormsAuthentication.FormsCookiePath
+                );
+
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket))
+            {   // 重點！！避免 Cookie遭受攻擊、盜用或不當存取。請查詢關鍵字「」。
+                HttpOnly = true  // 必須上網透過http才可以存取Cookie。不允許用戶端（寫前端程式）存取
+                                 //Secure = true;      // 需要搭配https（SSL）才行。
+            };
+
+            if (authTicket.IsPersistent)
+            {
+                authCookie.Expires = authTicket.Expiration;    // Cookie過期日（票證到期的本機日期和時間。）
+            }
+            Response.Cookies.Add(authCookie);   // 完成 Cookie，寫入使用者的瀏覽器與設備中
         }
 
     }

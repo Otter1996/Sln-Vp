@@ -1,72 +1,60 @@
-﻿@{
-    if (Session["member"] != null)
-    {
-        Layout = "~/Views/Shared/_LayoutMember.cshtml";
-    }
-    else
-    {
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-}
-<head>
+﻿@section AddToHead{
     <link href="~/Content/iframe-container.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <br><br>
-    <p class="h2" style="color:white;margin-top:20px" align="center">常見問題</p><br>
-    <!--手風琴-->
-    <div class="row justify-content-center">
-        <div class="accordion col-xl-6 col-lg-6 col-md-8 col-sm-10 co-12" id="accordionExample">
-            <div class="card">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            為什麼買回來的植物容易死掉？
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        對於剛買回來的植物，要做的第一件事情就是知道它們叫什麼，了解它們的習性，再合理擺放。
-                        一般來說，南向的房間光線最好，適合在窗台上養一些全日照的植物，
-                        比如多肉、仙人掌等;東、西方向的房間光照較弱，適合養一些半日照的植物，
-                        比如常春藤、倒掛金鐘等;北向房間適合養耐陰植物，礬根、蕨類等。
-                    </div>
+    }
+<br><br>
+<p class="h2" style="color:white;margin-top:20px" align="center">常見問題</p><br>
+<!--手風琴-->
+<div class="row justify-content-center">
+    <div class="accordion col-xl-6 col-lg-6 col-md-8 col-sm-10 co-12" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        為什麼買回來的植物容易死掉？
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    對於剛買回來的植物，要做的第一件事情就是知道它們叫什麼，了解它們的習性，再合理擺放。
+                    一般來說，南向的房間光線最好，適合在窗台上養一些全日照的植物，
+                    比如多肉、仙人掌等;東、西方向的房間光照較弱，適合養一些半日照的植物，
+                    比如常春藤、倒掛金鐘等;北向房間適合養耐陰植物，礬根、蕨類等。
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            能不能教我怎麼養植物?
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        能!請看以下教學。
-                        <div class="video-container">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/PMuiaYawDoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        能不能教我怎麼養植物?
+                    </button>
+                </h2>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            我購買的商品要退換貨要怎麼做?
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
-                        在濰濰植物網，如果你對於購買的產品不滿意，你可在 365 天內，攜帶完好的商品、原始包裝、統一發票及明細（刷卡購買者需信用卡與簽單）到店退換貨。
-                        或是你也可以與濰濰植物網客服連繫確認，請點選這裡確認各分店連絡方式。
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    能!請看以下教學。
+                    <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/PMuiaYawDoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        我購買的商品要退換貨要怎麼做?
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                    在菜鳥園藝，如果你對於購買的產品不滿意，你可在 365 天內，攜帶完好的商品、原始包裝、統一發票及明細（刷卡購買者需信用卡與簽單）到店退換貨。
+                    或是你也可以與濰濰植物網客服連繫確認，請點選這裡確認各分店連絡方式。
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+</div>
 

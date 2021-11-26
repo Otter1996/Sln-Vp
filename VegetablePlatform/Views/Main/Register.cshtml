@@ -1,110 +1,94 @@
 ﻿@model VegetablePlatform.Models.UserData
-
-@if(Session["member"] != null)
-{
-    Layout = "~/Views/Shared/_LayoutMember.cshtml";
-}
-else
-{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<style>
-    .form {
-        background: rgba(255,255,255,0.8);
-        padding: 20px;
-        padding-left: 40px;
-        padding-right: 40px;
+@section AddToHead{
+    <link href="~/Content/register.css" rel="stylesheet" />
     }
-</style>
-<body>
-    <div class="container-fluid body-content" style="margin-top: 250px">
-        <div class="row">
-            <div class="col">
-            </div>
-            <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3">
-                <p class="h2 text-xl-center" style="color:white">會員註冊</p>
-                <form class="form" method="post" action="" autocomplete="off" novalidate>
-                    <div class="row">
-                        <div class="col-12" style="color:red" align="center">
-                            @ViewBag.Message
-                        </div>
-                        <!--帳號-->
-                        <div class="col-12">
-                            <label for="Account" class="form-label">帳號</label>
-                            @Html.TextBoxFor(m => m.account, new { @class = "form-control", type = "text", name = "account", id = "account", placeholder = "請輸入帳號", required = "required" })
-                            <div class="invalid-feedback">
-                                帳號為必填。
-                            </div>
-                        </div>
-                        <!--密碼-->
-                        <div class="col-12">
-                            <label for="Password" class="form-label">密碼</label>
-                            @Html.TextBoxFor(m => m.password, new { @class = "form-control", type = "text", name = "password", id = "password", placeholder = "請輸入帳號", required = "required" })
-                            <div class="invalid-feedback">
-                                密碼為必填。
-                            </div>
-                        </div>
-                        <!--電子郵件-->
-                        <div class="col-12">
-                            <label for="Password" class="form-label">電子郵件</label>
-                            @Html.TextBoxFor(m => m.email, new { @class = "form-control", type = "text", name = "email", id = "email", placeholder = "請輸入電子郵件", required = "required" })
-                            <div class="invalid-feedback">
-                                電子郵件為必填。
-                            </div>
-                        </div>
-                        <!--姓名-->
-                        <div class="col-12">
-                            <label for="Password" class="form-label">姓名</label>
-                            @Html.TextBoxFor(m => m.name, new { @class = "form-control", type = "text", name = "name", id = "name", placeholder = "請輸入姓名", required = "required" })
-                            <div class="invalid-feedback">
-                                姓名為必填。
-                            </div>
-                        </div>
-                        <!--電話號碼-->
-                        <div class="col-12">
-                            <label for="Password" class="form-label">電話號碼</label>
-                            @Html.TextBoxFor(m => m.phone, new { @class = "form-control", type = "text", name = "phone", id = "phone", placeholder = "請輸入電話", required = "required" })
-                            <div class="invalid-feedback">
-                                電話號碼為必填。
-                            </div>
-                        </div>
-                        <!--生日-->
-                        <div class="col-12">
-                            <label for="Password" class="form-label">生日</label>
-                            @Html.TextBoxFor(m => m.birthday, new { @class = "form-control", type = "date", name = "birthday", id = "birthday", placeholder = "請輸入生日", required = "required" })
-                            <div class="invalid-feedback">
-                                生日為必填。
-                            </div>
-                        </div>
-                        <div class="form-group col-12" align="center">
-                            <button type="submit" class="btn btn-primary" align="center" style="margin-top:5px;">註冊</button>
+<div class="container-fluid body-content" style="margin-top: 250px">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-sm-8 col-md-6 col-lg-5 col-xl-3">
+            <p class="h2 text-xl-center" style="color:white">會員註冊</p>
+            <form class="form" method="post" action="" autocomplete="off" novalidate>
+                <div class="row">
+                    <div class="col-12" style="color:red" align="center">
+                        @ViewBag.Message
+                    </div>
+                    <!--帳號-->
+                    <div class="col-12">
+                        <label for="Account" class="form-label">帳號</label>
+                        @Html.TextBoxFor(m => m.account, new { @class = "form-control", type = "text", name = "account", id = "account", placeholder = "請輸入帳號", required = "required" })
+                        <div class="invalid-feedback">
+                            帳號為必填。
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="col">
-            </div>
+                    <!--密碼-->
+                    <div class="col-12">
+                        <label for="Password" class="form-label">密碼</label>
+                        @Html.TextBoxFor(m => m.password, new { @class = "form-control", type = "text", name = "password", id = "password", placeholder = "請輸入帳號", required = "required" })
+                        <div class="invalid-feedback">
+                            密碼為必填。
+                        </div>
+                    </div>
+                    <!--電子郵件-->
+                    <div class="col-12">
+                        <label for="Password" class="form-label">電子郵件</label>
+                        @Html.TextBoxFor(m => m.email, new { @class = "form-control", type = "text", name = "email", id = "email", placeholder = "請輸入電子郵件", required = "required" })
+                        <div class="invalid-feedback">
+                            電子郵件為必填。
+                        </div>
+                    </div>
+                    <!--姓名-->
+                    <div class="col-12">
+                        <label for="Password" class="form-label">姓名</label>
+                        @Html.TextBoxFor(m => m.name, new { @class = "form-control", type = "text", name = "name", id = "name", placeholder = "請輸入姓名", required = "required" })
+                        <div class="invalid-feedback">
+                            姓名為必填。
+                        </div>
+                    </div>
+                    <!--電話號碼-->
+                    <div class="col-12">
+                        <label for="Password" class="form-label">電話號碼</label>
+                        @Html.TextBoxFor(m => m.phone, new { @class = "form-control", type = "text", name = "phone", id = "phone", placeholder = "請輸入電話", required = "required" })
+                        <div class="invalid-feedback">
+                            電話號碼為必填。
+                        </div>
+                    </div>
+                    <!--生日-->
+                    <div class="col-12">
+                        <label for="Password" class="form-label">生日</label>
+                        @Html.TextBoxFor(m => m.birthday, new { @class = "form-control", type = "date", name = "birthday", id = "birthday", placeholder = "請輸入生日", required = "required" })
+                        <div class="invalid-feedback">
+                            生日為必填。
+                        </div>
+                    </div>
+                    <div class="form-group col-12" align="center">
+                        <button type="submit" class="btn btn-primary" align="center" style="margin-top:5px;">註冊</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col">
         </div>
     </div>
+</div>
+@section RenderScript{
     <script>
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('form');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('form');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
     </script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</body>
+}
