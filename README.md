@@ -486,8 +486,11 @@ public ActionResult Confirm(FormCollection post)
 ```
 
 (圖十五).使用Bootstrap網格系統所做出的排版(手機、平板、電腦螢幕皆可用)![](https://i.imgur.com/Nb8bcGf.png)
+
 (圖十六).navbar也沒問題!![](https://i.imgur.com/ivMTCuq.png)
+
 (圖十七).會員註冊介面![](https://i.imgur.com/JIkndoF.png)![](https://i.imgur.com/EazXhTS.png)
+
 (圖十八)網頁內建的搜尋引擎，能尋找資料庫裡的商品.![](https://i.imgur.com/KbRlbrF.png)
 ```
 [HttpGet]
